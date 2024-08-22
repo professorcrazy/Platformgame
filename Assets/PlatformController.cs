@@ -35,10 +35,11 @@ public class PlatformController : MonoBehaviour
         {
             Flip();
         }
+        //når knappen bliver trykket ned
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            //rb.AddForce(Vector2.up * , ForceMode2D.Impulse);
         }
     }
     private void FixedUpdate()
