@@ -7,11 +7,14 @@ namespace premade {
         private float inputX;
         [SerializeField] float jumpForce = 5f;
         bool facingRight = true;
+
+        //jumping variables
         [SerializeField] private Transform groundCheck;
         [SerializeField] private float checkRadius = 0.2f;
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] private bool isGrounded;
 
+        //for the jump buffer and cayote time
         bool isJumping;
         [SerializeField] float jumpTime = 0.5f;
         float jumpTimeLeft;
@@ -23,13 +26,17 @@ namespace premade {
 
         [SerializeField] ParticleSystem jumpEffect;
 
+        Animator anim;
 
         private void Start() {
             rb = GetComponent<Rigidbody2D>();
+            anim = GetComponent<Animator>();
         }
 
         private void Update() {
             inputX = Input.GetAxisRaw("Horizontal");
+            anim.SetFloat("Speed", Mathf.Abs(inputX)); //sets our inputs absolute value (allways positive) to the animator.
+
             if (inputX < 0 && facingRight)
             {
                 Flip();
